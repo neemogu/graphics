@@ -11,8 +11,8 @@ public class Filters {
     public static final int maxGaussianSize = 11;
     public static final int maxMedianSize = 11;
     public static final int minMedianSize = 3;
-    public static final double maxBrightness = 0.5;
-    public static final double minBrightness = -0.5;
+    public static final double maxBrightness = 50;
+    public static final double minBrightness = -50;
     public static final double maxContrast = 10.0;
     public static final double minContrast = 0.1;
     public static final double minRobertsThreshold = 0.0;
@@ -167,17 +167,18 @@ public class Filters {
         }
     }
 
-    public static void brightness(WritableImage img, double brightness) {
+    public static void brightness(WritableImage img, int brightness) {
         if (brightness < minBrightness || brightness > maxBrightness) {
             return;
         }
+        double brightnessNormalized = brightness / 100.0;
         for (int i = 0; i < img.getWidth(); ++i) {
             for (int j = 0; j < img.getHeight(); ++j) {
                 Color color = img.getPixelReader().getColor(i, j);
                 img.getPixelWriter().setColor(i, j, saturate(
-                        color.getRed() + brightness,
-                        color.getGreen() + brightness,
-                        color.getBlue() + brightness
+                        color.getRed() + brightnessNormalized,
+                        color.getGreen() + brightnessNormalized,
+                        color.getBlue() + brightnessNormalized
                 ));
             }
         }

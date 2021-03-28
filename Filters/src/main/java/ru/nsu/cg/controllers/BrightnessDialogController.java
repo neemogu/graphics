@@ -51,8 +51,8 @@ public class BrightnessDialogController implements DialogController, Initializab
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int minValue = (int)(Filters.minBrightness * 100);
-        int maxValue = (int)(Filters.maxBrightness * 100);
+        int minValue = (int)(Filters.minBrightness);
+        int maxValue = (int)(Filters.maxBrightness);
         slider.minProperty().setValue(minValue);
         slider.maxProperty().setValue(maxValue);
         textField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
@@ -84,7 +84,7 @@ public class BrightnessDialogController implements DialogController, Initializab
         });
         okButton.setOnAction((e) -> {
             WritableImage imageToFilter = model.getImageToFilter();
-            Filters.brightness(imageToFilter, model.getSettings().getBrightness() / 100.0);
+            Filters.brightness(imageToFilter, model.getSettings().getBrightness());
             model.applyChanges();
             model.getSettings().setLastFilter(BRIGHTNESS);
             window.close();

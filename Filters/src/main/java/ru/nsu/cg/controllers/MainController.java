@@ -332,7 +332,7 @@ public class MainController implements Subscriber, Initializable {
                     Filters.gammaCorrection(imageToFilter, model.getSettings().getGamma());
                     break;
                 case BRIGHTNESS:
-                    Filters.brightness(imageToFilter, model.getSettings().getBrightness() / 100.0);
+                    Filters.brightness(imageToFilter, model.getSettings().getBrightness());
                     break;
                 case EMBOSSING:
                     Filters.embossing(imageToFilter);
