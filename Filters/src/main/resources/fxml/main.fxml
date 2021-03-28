@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
+<?import java.net.URL?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane fx:controller="ru.nsu.cg.controllers.MainController" styleClass="main"
+      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <top>
+        <VBox>
+            <MenuBar styleClass="menuBar">
+                <Menu styleClass="menu" mnemonicParsing="false" text="File">
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="openMenu" text="Open"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="saveMenu" text="Save as   "/>
+                    <SeparatorMenuItem styleClass="separatorMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="closeMenu" text="Close"/>
+                </Menu>
+                <Menu styleClass="menu" mnemonicParsing="false" text="Edit">
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Reset filters" fx:id="resetMenu"/>
+                    <SeparatorMenuItem styleClass="separatorMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Zoom" fx:id="zoomMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Viewport size" fx:id="reduceToViewportMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Origin size" fx:id="originSizeMenu"/>
+                    <SeparatorMenuItem styleClass="separatorMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Rotate image" fx:id="rotateMenu"/>
+                    <SeparatorMenuItem styleClass="separatorMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Settings" fx:id="settingsMenu"/>
+                </Menu>
+                <Menu styleClass="menu" mnemonicParsing="false" text="Filters">
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Grayscale" fx:id="grayscaleMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Negative" fx:id="negativeMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Solarisation" fx:id="solariseMenu"/>
+                    <SeparatorMenuItem styleClass="separatorMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Gaussian blur" fx:id="gaussianMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Sharpening" fx:id="sharpeningMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Watercolor" fx:id="watercolorMenu"/>
+                    <SeparatorMenuItem styleClass="separatorMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Roberts edge detection" fx:id="robertsMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Sobel edge detection" fx:id="sobelMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Embossing" fx:id="embossingMenu"/>
+                    <SeparatorMenuItem styleClass="separatorMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Last filter" fx:id="lastFilterMenu"/>
+                </Menu>
+                <Menu styleClass="menu" mnemonicParsing="false" text="Rendering">
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Brightness" fx:id="brightnessMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Contrast" fx:id="contrastMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Gamma" fx:id="gammaMenu"/>
+                    <SeparatorMenuItem styleClass="separatorMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Floyd-Steinsberg dithering" fx:id="fsdMenu"/>
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Ordered dithering" fx:id="odMenu"/>
+                </Menu>
+                <Menu styleClass="menu" mnemonicParsing="false" text="Help">
+                    <MenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="aboutMenu" text="About     "/>
+                </Menu>
+            </MenuBar>
+
+            <ToolBar styleClass="toolbar">
+                <fx:include source="buttons/openButton.fxml" fx:id="openButton"/>
+                <fx:include source="buttons/saveButton.fxml" fx:id="saveButton"/>
+                <Separator styleClass="separator"/>
+                <fx:include source="buttons/resetButton.fxml" fx:id="resetButton"/>
+                <fx:include source="buttons/zoomButton.fxml" fx:id="zoomButton"/>
+                <fx:include source="buttons/reduceToViewportButton.fxml" fx:id="reduceToViewportButton"/>
+                <fx:include source="buttons/originSizeButton.fxml" fx:id="originSizeButton"/>
+                <fx:include source="buttons/rotateButton.fxml" fx:id="rotateButton"/>
+                <fx:include source="buttons/settingsButton.fxml" fx:id="settingsButton"/>
+                <Separator styleClass="separator"/>
+                <fx:include source="buttons/brightness_button.fxml" fx:id="brightnessButton"/>
+                <fx:include source="buttons/contrastButton.fxml" fx:id="contrastButton"/>
+                <fx:include source="buttons/gammaButton.fxml" fx:id="gammaButton"/>
+                <Separator styleClass="separator"/>
+                <fx:include source="buttons/grayscaleButton.fxml" fx:id="grayscaleButton"/>
+                <fx:include source="buttons/negativeButton.fxml" fx:id="negativeButton"/>
+                <fx:include source="buttons/solariseButton.fxml" fx:id="solariseButton"/>
+                <Separator styleClass="separator"/>
+                <fx:include source="buttons/gaussianButton.fxml" fx:id="gaussianButton"/>
+                <fx:include source="buttons/sharpeningButton.fxml" fx:id="sharpeningButton"/>
+                <fx:include source="buttons/watercolorButton.fxml" fx:id="watercolorButton"/>
+                <Separator styleClass="separator"/>
+                <fx:include source="buttons/robertsButton.fxml" fx:id="robertsButton"/>
+                <fx:include source="buttons/sobelButton.fxml" fx:id="sobelButton"/>
+                <fx:include source="buttons/embossingButton.fxml" fx:id="embossingButton"/>
+                <Separator styleClass="separator"/>
+                <fx:include source="buttons/fsdButton.fxml" fx:id="fsdButton"/>
+                <fx:include source="buttons/odButton.fxml" fx:id="odButton"/>
+                <Separator styleClass="separator"/>
+                <fx:include source="buttons/aboutButton.fxml" fx:id="aboutButton"/>
+            </ToolBar>
+        </VBox>
+    </top>
+
+
+    <center>
+        <ScrollPane styleClass="scrollPane" fx:id="scrollPane">
+            <BorderPane.margin>
+                <Insets>
+                    <top>5</top>
+                    <right>5</right>
+                    <bottom>5</bottom>
+                    <left>5</left>
+                </Insets>
+            </BorderPane.margin>
+            <ImageView fx:id="workspaceImageView"/>
+        </ScrollPane>
+    </center>
+
+    <stylesheets>
+        <URL value="@/stylesheets/style.css"/>
+    </stylesheets>
+</BorderPane>

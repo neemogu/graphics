@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<?import java.net.URL?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Label?>
+<VBox alignment="CENTER" fx:controller="ru.nsu.cg.controllers.BrightnessDialogController"
+      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <Label styleClass="propertyLabel" text="Increase brightness by:">
+        <VBox.margin>
+            <Insets>
+                <top>15</top>
+                <right>15</right>
+                <left>15</left>
+            </Insets>
+        </VBox.margin>
+    </Label>
+    <HBox styleClass="settingHBox">
+        <TextField styleClass="propertyTextField" fx:id="textField"/>
+        <Slider styleClass="propertySlider" fx:id="slider"/>
+        <VBox.margin>
+            <Insets>
+                <top>15</top>
+                <right>15</right>
+                <bottom>15</bottom>
+                <left>15</left>
+            </Insets>
+        </VBox.margin>
+    </HBox>
+    <HBox styleClass="okCancelBox">
+        <Button styleClass="simpleButton" text="OK" fx:id="okButton"/>
+        <Button styleClass="simpleButton" text="Cancel" fx:id="cancelButton"/>
+        <VBox.margin>
+            <Insets>
+                <left>15</left>
+                <right>15</right>
+                <bottom>15</bottom>
+            </Insets>
+        </VBox.margin>
+    </HBox>
+    <stylesheets>
+        <URL value="@/stylesheets/style.css"/>
+    </stylesheets>
+</VBox>

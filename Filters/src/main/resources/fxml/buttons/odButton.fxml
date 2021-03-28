@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+
+<Button mnemonicParsing="false" styleClass="toolbarButton"
+        xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <tooltip>
+        <Tooltip styleClass="tooltip" text="Ordered dithering" />
+    </tooltip>
+    <graphic>
+        <ImageView>
+            <Image preserveRatio="true" requestedHeight="25" requestedWidth="205"
+                   smooth="true" url="@/icons/od_icon.png" />
+        </ImageView>
+    </graphic>
+    <stylesheets>
+        <URL value="@/stylesheets/style.css"/>
+    </stylesheets>
+</Button>

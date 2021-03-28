@@ -1,0 +1,99 @@
+.tooltip {
+    -fx-font-size: 12;
+    -fx-background-color: ivory;
+    -fx-text-fill: black;
+}
+
+.toolbarButton {
+    -fx-min-width: 25px;
+    -fx-pref-width: 30px;
+    -fx-max-width: 50px;
+    -fx-min-height: 25px;
+    -fx-pref-height: 30px;
+    -fx-max-height: 50px;
+    -fx-focus-traversable: false;
+}
+
+.simpleButton {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 30px;
+
+}
+
+.errorMessage {
+    -fx-font-size: 15;
+    -fx-max-width: 200px;
+    -fx-wrap-text: true;
+}
+
+.aboutMessage {
+    -fx-font-size: 16;
+    -fx-max-width: 400px;
+    -fx-wrap-text: true;
+}
+
+.separator {
+
+}
+
+.toolbar {
+    /*-fx-background-color: linear-gradient(white, lightslategray, dimgrey);*/
+}
+
+.menuBar {
+
+}
+
+.menu {
+
+}
+
+.menuItem {
+    -fx-min-width: 100px;
+}
+
+.scrollPane {
+    -fx-focus-traversable: false;
+    -fx-pannable: true;
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+    -fx-border-style: dashed;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+
+.scroll-bar .track {
+    -fx-background-color: azure;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: dimgrey;
+}
+
+.main {
+
+}
+
+.separatorMenu {
+
+}
+
+.settingHBox {
+    -fx-alignment: center;
+    -fx-spacing: 15;
+}
+
+.propertyTextField {
+}
+
+.propertySlider {
+}
+
+.okCancelBox {
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+
+.propertyLabel {
+
+}

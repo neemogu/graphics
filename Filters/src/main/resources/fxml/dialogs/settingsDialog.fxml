@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<?import java.net.URL?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<VBox alignment="CENTER" fx:controller="ru.nsu.cg.controllers.SettingsDialogController"
+      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <Label styleClass="propertyLabel" text="Interpolation type:">
+        <VBox.margin>
+            <Insets>
+                <top>15</top>
+                <right>15</right>
+                <left>15</left>
+            </Insets>
+        </VBox.margin>
+    </Label>
+    <RadioButton text="Bilinear" fx:id="bilinearButton">
+        <VBox.margin>
+            <Insets>
+                <top>15</top>
+                <right>15</right>
+                <left>15</left>
+            </Insets>
+        </VBox.margin>
+        <toggleGroup>
+            <ToggleGroup fx:id="lerpTypeGroup"/>
+        </toggleGroup>
+    </RadioButton>
+    <RadioButton text="Nearest" fx:id="nearestButton">
+        <VBox.margin>
+            <Insets>
+                <top>15</top>
+                <right>15</right>
+                <left>15</left>
+                <bottom>15</bottom>
+            </Insets>
+        </VBox.margin>
+        <toggleGroup>
+            <fx:reference source="lerpTypeGroup"/>
+        </toggleGroup>
+    </RadioButton>
+    <HBox styleClass="okCancelBox">
+        <Button styleClass="simpleButton" text="OK" fx:id="okButton"/>
+        <Button styleClass="simpleButton" text="Cancel" fx:id="cancelButton"/>
+        <VBox.margin>
+            <Insets>
+                <right>15</right>
+                <bottom>15</bottom>
+                <left>15</left>
+            </Insets>
+        </VBox.margin>
+    </HBox>
+    <stylesheets>
+        <URL value="@/stylesheets/style.css"/>
+    </stylesheets>
+</VBox>
