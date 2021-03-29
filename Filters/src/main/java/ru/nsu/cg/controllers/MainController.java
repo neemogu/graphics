@@ -11,10 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
@@ -32,6 +29,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class MainController implements Subscriber, Initializable {
+    private static long lastTime = System.nanoTime();
+    private static final long minDeltaTime = 15000000;
     private FiltersModel model = null;
 
     private FileChooser saveFileChooser;
@@ -53,7 +52,7 @@ public class MainController implements Subscriber, Initializable {
     @FXML
     private MenuItem zoomMenu;
     @FXML
-    private MenuItem reduceToViewportMenu;
+    private CheckMenuItem reduceToViewportMenu;
     @FXML
     private MenuItem originSizeMenu;
     @FXML
@@ -102,7 +101,7 @@ public class MainController implements Subscriber, Initializable {
     @FXML
     private Button zoomButton;
     @FXML
-    private Button reduceToViewportButton;
+    private ToggleButton reduceToViewportButton;
     @FXML
     private Button originSizeButton;
     @FXML
@@ -173,12 +172,14 @@ public class MainController implements Subscriber, Initializable {
 
     @Override
     public void update() {
+        reduceToViewportButton.setSelected(model.isViewportSize());
+        reduceToViewportMenu.setSelected(model.isViewportSize());
+        resetButton.setDisable(!model.canReset());
+        lastFilterMenu.setText("Last Filter (" + model.getSettings().getLastFilter().name() + ")");
         if (model.isImageOpened()) {
             scrollPane.setVisible(true);
             workspaceImageView.setImage(model.getImage());
         }
-        resetButton.setDisable(!model.canReset());
-        lastFilterMenu.setText("Last Filter (" + model.getSettings().getLastFilter().name() + ")");
     }
 
     @FXML
@@ -242,45 +243,29 @@ public class MainController implements Subscriber, Initializable {
             if (!model.isImageOpened()) {
                 return;
             }
+            model.setIsViewportSize(false);
             model.setOriginScale();
             model.applyChanges();
         };
         originSizeButton.setOnAction(originSizeAction);
         originSizeMenu.setOnAction(originSizeAction);
 
-        EventHandler<ActionEvent> viewportSizeAction = (e) -> {
-            if (!model.isImageOpened()) {
-                return;
+        reduceToViewportButton.setOnAction((e) -> {
+            if (model.isViewportSize() != reduceToViewportButton.isSelected()) {
+                model.setIsViewportSize(reduceToViewportButton.isSelected());
+                updateViewport();
             }
-            int hbarWidth = 0;
-            int vbarWidth = 0;
-            Set<Node> nodes = scrollPane.lookupAll(".scroll-bar");
-            for (final Node node : nodes) {
-                if (node instanceof ScrollBar) {
-                    ScrollBar sb = (ScrollBar) node;
-                    if (!sb.isVisible()) {
-                        continue;
-                    }
-                    if (sb.getOrientation() == Orientation.VERTICAL) {
-                        vbarWidth = (int)sb.getWidth();
-                    } else {
-                        hbarWidth = (int)sb.getHeight();
-                    }
-                }
+        });
+        reduceToViewportMenu.setOnAction((e) -> {
+            if (model.isViewportSize() != reduceToViewportMenu.isSelected()) {
+                model.setIsViewportSize(reduceToViewportMenu.isSelected());
+                updateViewport();
             }
-            int viewportWidth = (int)scrollPane.getViewportBounds().getWidth() + vbarWidth;
-            int viewportHeight = (int)scrollPane.getViewportBounds().getHeight() + hbarWidth;
-            double widthRatio = (double)model.getOriginWidth() / viewportWidth;
-            double heightRatio = (double)model.getOriginHeight() / viewportHeight;
-            int resultWidth = widthRatio >= heightRatio ? viewportWidth : (int)((double)model.getOriginWidth() / heightRatio);
-            int resultHeight = heightRatio >= widthRatio ? viewportHeight : (int)((double)model.getOriginHeight() / widthRatio);
-            model.getSettings().setResizeWidth(resultWidth);
-            model.getSettings().setResizeHeight(resultHeight);
-            model.setScale();
-            model.applyChanges();
-        };
-        reduceToViewportButton.setOnAction(viewportSizeAction);
-        reduceToViewportMenu.setOnAction(viewportSizeAction);
+        });
+
+        scrollPane.viewportBoundsProperty().addListener((obs, ov, nv) -> {
+            updateViewport();
+        });
 
         EventHandler<ActionEvent> resetAction = (e) -> model.resetFilters();
         resetButton.setOnAction(resetAction);
@@ -366,5 +351,39 @@ public class MainController implements Subscriber, Initializable {
             }
             model.applyChanges();
         });
+    }
+
+    private void updateViewport() {
+        long currentTime = System.nanoTime();
+        if (!model.isImageOpened() || !model.isViewportSize() || currentTime - lastTime < minDeltaTime) {
+            return;
+        }
+        lastTime = currentTime;
+        int hbarWidth = 0;
+        int vbarWidth = 0;
+        Set<Node> nodes = scrollPane.lookupAll(".scroll-bar");
+        for (final Node node : nodes) {
+            if (node instanceof ScrollBar) {
+                ScrollBar sb = (ScrollBar) node;
+                if (!sb.isVisible()) {
+                    continue;
+                }
+                if (sb.getOrientation() == Orientation.VERTICAL) {
+                    vbarWidth = (int)sb.getWidth();
+                } else {
+                    hbarWidth = (int)sb.getHeight();
+                }
+            }
+        }
+        int viewportWidth = (int)scrollPane.getViewportBounds().getWidth() + vbarWidth;
+        int viewportHeight = (int)scrollPane.getViewportBounds().getHeight() + hbarWidth;
+        double widthRatio = (double)model.getOriginWidth() / viewportWidth;
+        double heightRatio = (double)model.getOriginHeight() / viewportHeight;
+        int resultWidth = widthRatio >= heightRatio ? viewportWidth : (int)((double)model.getOriginWidth() / heightRatio);
+        int resultHeight = heightRatio >= widthRatio ? viewportHeight : (int)((double)model.getOriginHeight() / widthRatio);
+        model.getSettings().setResizeWidth(resultWidth);
+        model.getSettings().setResizeHeight(resultHeight);
+        model.setScale();
+        model.applyChanges();
     }
 }

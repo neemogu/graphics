@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 
-<Button mnemonicParsing="false" styleClass="toolbarButton"
+<ToggleButton mnemonicParsing="false" styleClass="toolbarToggleButton"
         xmlns="http://javafx.com/javafx/10.0.2-internal">
     <tooltip>
         <Tooltip styleClass="tooltip" text="Set image size to viewport size" />
@@ -18,4 +18,4 @@
     <stylesheets>
         <URL value="@/stylesheets/style.css"/>
     </stylesheets>
-</Button>
+</ToggleButton>

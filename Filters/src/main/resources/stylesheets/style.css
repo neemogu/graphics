@@ -14,6 +14,16 @@
     -fx-focus-traversable: false;
 }
 
+.toolbarToggleButton {
+    -fx-min-width: 25px;
+    -fx-pref-width: 30px;
+    -fx-max-width: 50px;
+    -fx-min-height: 25px;
+    -fx-pref-height: 30px;
+    -fx-max-height: 50px;
+    -fx-focus-traversable: false;
+}
+
 .simpleButton {
     -fx-pref-width: 100px;
     -fx-pref-height: 30px;

@@ -14,8 +14,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.CheckMenuItem?>
 <BorderPane fx:controller="ru.nsu.cg.controllers.MainController" styleClass="main"
-      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
+            xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
     <top>
         <VBox>
             <MenuBar styleClass="menuBar">
@@ -29,7 +30,7 @@
                     <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Reset filters" fx:id="resetMenu"/>
                     <SeparatorMenuItem styleClass="separatorMenu"/>
                     <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Zoom" fx:id="zoomMenu"/>
-                    <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Viewport size" fx:id="reduceToViewportMenu"/>
+                    <CheckMenuItem styleClass="menuItem" mnemonicParsing="false" text="Viewport size" fx:id="reduceToViewportMenu"/>
                     <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Origin size" fx:id="originSizeMenu"/>
                     <SeparatorMenuItem styleClass="separatorMenu"/>
                     <MenuItem styleClass="menuItem" mnemonicParsing="false" text="Rotate image" fx:id="rotateMenu"/>

@@ -25,6 +25,7 @@ public class FiltersModel {
     private int scaledHeight;
     private boolean canReset = false;
     private final ArrayList<Subscriber> subs = new ArrayList<>();
+    private boolean isViewportSize = false;
 
     public boolean openImage(File imageFile) {
         if (imageFile == null) {
@@ -95,6 +96,7 @@ public class FiltersModel {
         resetScale();
         resetRotation();
         canReset = false;
+        isViewportSize = false;
         isFilteredImage = false;
         notifySubscribers();
     }
@@ -103,6 +105,11 @@ public class FiltersModel {
         isFilteredImage = true;
         canReset = true;
         notifySubscribers();
+    }
+
+    public void applyChangesWithoutUpdating() {
+        isFilteredImage = true;
+        canReset = true;
     }
 
     public WritableImage getImageToFilter() {
@@ -163,5 +170,14 @@ public class FiltersModel {
     }
     public int getOriginHeight() {
         return (int)originalImage.getHeight();
+    }
+
+    public void setIsViewportSize(boolean isViewportSize) {
+        this.isViewportSize = isViewportSize;
+        notifySubscribers();
+    }
+
+    public boolean isViewportSize() {
+        return isViewportSize;
     }
 }
