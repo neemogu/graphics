@@ -89,8 +89,8 @@ public class SolariseDialogController implements DialogController, Initializable
                 int redThresholdParsedValue = Integer.parseInt(redThresholdTextField.getText());
                 int greenThresholdParsedValue = Integer.parseInt(greenThresholdTextField.getText());
                 int blueThresholdParsedValue = Integer.parseInt(blueThresholdTextField.getText());
-                if (redThresholdParsedValue >= Filters.minColorThreshold && redThresholdParsedValue <= Filters.maxColorThreshold ||
-                        greenThresholdParsedValue >= Filters.minColorThreshold && greenThresholdParsedValue <= Filters.maxColorThreshold ||
+                if (redThresholdParsedValue >= Filters.minColorThreshold && redThresholdParsedValue <= Filters.maxColorThreshold &&
+                        greenThresholdParsedValue >= Filters.minColorThreshold && greenThresholdParsedValue <= Filters.maxColorThreshold &&
                         blueThresholdParsedValue >= Filters.minColorThreshold && blueThresholdParsedValue <= Filters.maxColorThreshold) {
                     model.getSettings().setSolariseRedThreshold(redThresholdParsedValue);
                     model.getSettings().setSolariseGreenThreshold(greenThresholdParsedValue);

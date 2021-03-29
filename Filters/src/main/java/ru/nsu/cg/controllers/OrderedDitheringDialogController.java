@@ -89,8 +89,8 @@ public class OrderedDitheringDialogController implements DialogController, Initi
                 int redQuantityParsedValue = Integer.parseInt(redQuantityTextField.getText());
                 int greenQuantityParsedValue = Integer.parseInt(greenQuantityTextField.getText());
                 int blueQuantityParsedValue = Integer.parseInt(blueQuantityTextField.getText());
-                if (redQuantityParsedValue >= Filters.minColorQuantity && redQuantityParsedValue <= Filters.maxColorQuantity ||
-                        greenQuantityParsedValue >= Filters.minColorQuantity && greenQuantityParsedValue <= Filters.maxColorQuantity ||
+                if (redQuantityParsedValue >= Filters.minColorQuantity && redQuantityParsedValue <= Filters.maxColorQuantity &&
+                        greenQuantityParsedValue >= Filters.minColorQuantity && greenQuantityParsedValue <= Filters.maxColorQuantity &&
                         blueQuantityParsedValue >= Filters.minColorQuantity && blueQuantityParsedValue <= Filters.maxColorQuantity) {
                     model.getSettings().setOrderedRedQuantity(redQuantityParsedValue);
                     model.getSettings().setOrderedGreenQuantity(greenQuantityParsedValue);
