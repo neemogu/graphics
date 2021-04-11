@@ -1,0 +1,1 @@
+ru.nsu.cg.model.Function::calculate - function calculating method

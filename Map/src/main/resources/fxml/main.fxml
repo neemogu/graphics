@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
+<?import java.net.URL?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Priority?>
+<VBox fx:controller="ru.nsu.cg.controllers.MainController" styleClass="main"
+      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <MenuBar styleClass="menuBar">
+        <Menu styleClass="menu" mnemonicParsing="false" text="Function">
+            <MenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="openMenu" text="Open properties as a file"/>
+            <MenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="settingsMenu" text="Properties settings"/>
+            <MenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="saveMenu" text="Save image"/>
+        </Menu>
+        <Menu styleClass="menu" mnemonicParsing="false" text="Display">
+            <Menu styleClass="menu" mnemonicParsing="false" text="Display mode">
+                <RadioMenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="smoothDisplayModeMenu" text="Smooth mode">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="displayModeToggleGroup"/>
+                    </toggleGroup>
+                </RadioMenuItem>
+                <RadioMenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="colorMapDisplayModeMenu" text="Color map mode">
+                    <toggleGroup>
+                        <fx:reference source="displayModeToggleGroup"/>
+                    </toggleGroup>
+                </RadioMenuItem>
+            </Menu>
+            <CheckMenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="isolineDisplayMenu" text="Show isolines"/>
+            <CheckMenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="gridDisplayMenu" text="Show grid"/>
+        </Menu>
+        <Menu styleClass="menu" mnemonicParsing="false" text="Help">
+            <MenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="aboutMenu" text="About     "/>
+        </Menu>
+    </MenuBar>
+
+    <ToolBar styleClass="toolbar">
+        <fx:include source="buttons/openButton.fxml" fx:id="openButton"/>
+        <fx:include source="buttons/settingsButton.fxml" fx:id="settingsButton"/>
+        <fx:include source="buttons/saveButton.fxml" fx:id="saveButton"/>
+        <Separator styleClass="separator"/>
+        <fx:include source="buttons/displayModeButton.fxml" fx:id="displayModeButton"/>
+        <fx:include source="buttons/isolineDisplayButton.fxml" fx:id="isolineDisplayButton"/>
+        <fx:include source="buttons/gridDisplayButton.fxml" fx:id="gridDisplayButton"/>
+        <Separator styleClass="separator"/>
+        <fx:include source="buttons/aboutButton.fxml" fx:id="aboutButton"/>
+    </ToolBar>
+
+    <Pane VBox.vgrow="ALWAYS" fx:id="resizePane">
+        <ImageView fx:id="displayImageView"/>
+        <VBox.margin>
+            <Insets>
+                <top>10</top>
+                <right>10</right>
+                <bottom>10</bottom>
+                <left>10</left>
+            </Insets>
+        </VBox.margin>
+    </Pane>
+
+    <HBox alignment="CENTER" styleClass="legendLabelsHBox" fx:id="legendLabelsHBox">
+        <VBox.margin>
+            <Insets>
+                <top>20</top>
+                <right>10</right>
+                <bottom>5</bottom>
+                <left>10</left>
+            </Insets>
+        </VBox.margin>
+    </HBox>
+    <HBox alignment="CENTER">
+        <ImageView fx:id="legendImageView"/>
+        <VBox.margin>
+            <Insets>
+                <top>5</top>
+                <right>10</right>
+                <bottom>15</bottom>
+                <left>10</left>
+            </Insets>
+        </VBox.margin>
+    </HBox>
+    <HBox alignment="CENTER">
+        <Label fx:id="dynamicXYFLabel"/>
+        <VBox.margin>
+            <Insets>
+                <top>15</top>
+                <right>15</right>
+                <bottom>15</bottom>
+                <left>15</left>
+            </Insets>
+        </VBox.margin>
+    </HBox>
+    <stylesheets>
+        <URL value="@/stylesheets/style.css"/>
+    </stylesheets>
+</VBox>

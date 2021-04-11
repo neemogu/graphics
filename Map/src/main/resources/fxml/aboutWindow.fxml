@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<?import java.net.URL?>
+<VBox alignment="CENTER" fx:controller="ru.nsu.cg.controllers.MessageWindowController"
+      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <Label styleClass="aboutMessage" fx:id="message">
+        <VBox.margin>
+            <Insets>
+                <top>15</top>
+                <right>15</right>
+                <bottom>15</bottom>
+                <left>15</left>
+            </Insets>
+        </VBox.margin>
+    </Label>
+    <Button styleClass="simpleButton" text="OK" fx:id="okButton">
+        <VBox.margin>
+            <Insets>
+                <bottom>15</bottom>
+            </Insets>
+        </VBox.margin>
+    </Button>
+    <stylesheets>
+        <URL value="@/stylesheets/style.css"/>
+    </stylesheets>
+</VBox>

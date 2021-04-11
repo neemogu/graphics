@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.net.URL?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<Button mnemonicParsing="false" styleClass="toolbarButton"
+        xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <tooltip>
+        <Tooltip styleClass="tooltip" text="Save image"/>
+    </tooltip>
+    <graphic>
+        <ImageView>
+            <Image preserveRatio="true" requestedHeight="25" requestedWidth="25"
+                   smooth="true" url="@/icons/save.png" />
+        </ImageView>
+    </graphic>
+    <stylesheets>
+        <URL value="@/stylesheets/style.css"/>
+    </stylesheets>
+</Button>

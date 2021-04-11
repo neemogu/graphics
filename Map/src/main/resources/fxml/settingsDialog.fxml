@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<?import java.net.URL?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ColorPicker?>
+
+<?import javafx.scene.control.ScrollPane?>
+<ScrollPane fx:controller="ru.nsu.cg.controllers.SettingsDialogController"
+            xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <VBox alignment="CENTER" >
+        <Label styleClass="propertyLabel" text="Enter function domain:">
+            <VBox.margin>
+                <Insets>
+                    <top>15</top>
+                    <right>15</right>
+                    <left>15</left>
+                </Insets>
+            </VBox.margin>
+        </Label>
+        <HBox styleClass="settingHBox">
+            <Label styleClass="propertyLabel" text="Start X:"/>
+            <TextField styleClass="propertyTextField" fx:id="startXTextField"/>
+            <VBox.margin>
+                <Insets>
+                    <top>15</top>
+                    <right>15</right>
+                    <left>15</left>
+                </Insets>
+            </VBox.margin>
+        </HBox>
+        <HBox styleClass="settingHBox">
+            <Label styleClass="propertyLabel" text="End X:"/>
+            <TextField styleClass="propertyTextField" fx:id="endXTextField"/>
+            <VBox.margin>
+                <Insets>
+                    <top>15</top>
+                    <right>15</right>
+                    <left>15</left>
+                </Insets>
+            </VBox.margin>
+        </HBox>
+        <HBox styleClass="settingHBox">
+            <Label styleClass="propertyLabel" text="Start Y:"/>
+            <TextField styleClass="propertyTextField" fx:id="startYTextField"/>
+            <VBox.margin>
+                <Insets>
+                    <top>15</top>
+                    <right>15</right>
+                    <left>15</left>
+                </Insets>
+            </VBox.margin>
+        </HBox>
+        <HBox styleClass="settingHBox">
+            <Label styleClass="propertyLabel" text="End Y:"/>
+            <TextField styleClass="propertyTextField" fx:id="endYTextField"/>
+            <VBox.margin>
+                <Insets>
+                    <top>15</top>
+                    <right>15</right>
+                    <bottom>15</bottom>
+                    <left>15</left>
+                </Insets>
+            </VBox.margin>
+        </HBox>
+        <Label styleClass="propertyLabel" text="Enter grid size:">
+            <VBox.margin>
+                <Insets>
+                    <top>15</top>
+                    <right>15</right>
+                    <left>15</left>
+                </Insets>
+            </VBox.margin>
+        </Label>
+        <HBox styleClass="settingHBox">
+            <Label styleClass="propertyLabel" text="Grid width:"/>
+            <TextField styleClass="propertyTextField" fx:id="gridWidthTextField"/>
+            <VBox.margin>
+                <Insets>
+                    <top>15</top>
+                    <right>15</right>
+                    <left>15</left>
+                </Insets>
+            </VBox.margin>
+        </HBox>
+        <HBox styleClass="settingHBox">
+            <Label styleClass="propertyLabel" text="Grid height:"/>
+            <TextField styleClass="propertyTextField" fx:id="gridHeightTextField"/>
+            <VBox.margin>
+                <Insets>
+                    <top>15</top>
+                    <right>15</right>
+                    <bottom>15</bottom>
+                    <left>15</left>
+                </Insets>
+            </VBox.margin>
+        </HBox>
+        <Label styleClass="propertyLabel" text="Select isoline options:">
+            <VBox.margin>
+                <Insets>
+                    <top>15</top>
+                    <right>15</right>
+                    <left>15</left>
+                </Insets>
+            </VBox.margin>
+        </Label>
+        <HBox styleClass="settingHBox">
+            <Label styleClass="propertyLabel" text="Isolines count:"/>
+            <TextField styleClass="propertyTextField" fx:id="isolinesCountTextField"/>
+            <VBox.margin>
+                <Insets>
+                    <top>15</top>
+                    <right>15</right>
+                    <left>15</left>
+                </Insets>
+            </VBox.margin>
+        </HBox>
+        <HBox styleClass="settingHBox">
+            <Label styleClass="propertyLabel" text="Isolines color:"/>
+            <ColorPicker styleClass="settingsColorPicker" fx:id="isolineColorPicker"/>
+            <VBox.margin>
+                <Insets>
+                    <top>15</top>
+                    <right>15</right>
+                    <bottom>15</bottom>
+                    <left>15</left>
+                </Insets>
+            </VBox.margin>
+        </HBox>
+        <Label styleClass="propertyLabel" text="Enter colors to display function:">
+            <VBox.margin>
+                <Insets>
+                    <top>15</top>
+                    <right>15</right>
+                    <left>15</left>
+                </Insets>
+            </VBox.margin>
+        </Label>
+        <VBox fx:id="displayColorsVBox"/>
+        <HBox styleClass="okCancelBox">
+            <Button styleClass="simpleButton" text="OK" fx:id="okButton"/>
+            <Button styleClass="simpleButton" text="Cancel" fx:id="cancelButton"/>
+            <VBox.margin>
+                <Insets>
+                    <top>15</top>
+                    <left>15</left>
+                    <right>15</right>
+                    <bottom>15</bottom>
+                </Insets>
+            </VBox.margin>
+        </HBox>
+        <stylesheets>
+            <URL value="@/stylesheets/style.css"/>
+        </stylesheets>
+    </VBox>
+</ScrollPane>
