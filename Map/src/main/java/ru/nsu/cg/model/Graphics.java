@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import java.util.Stack;
 
 public class Graphics {
-    private static final double isolineEpsilon = 0.01;
+    private static final double isolineEpsilon = 0.001;
 
     public static final int maxThickness = 10;
 
@@ -81,13 +81,50 @@ public class Graphics {
     }
 
     public static void drawGrid(WritableImage img, int gridWidth, int gridHeight, int thickness, Color color) {
-        double deltaGridWidth = img.getWidth() / (gridWidth - 1);
-        double deltaGridHeight = img.getHeight() / (gridHeight - 1);
+        double deltaGridWidth = (img.getWidth() - 1) / (gridWidth - 1);
+        double deltaGridHeight = (img.getHeight() - 1) / (gridHeight - 1);
         for (int i = 0; i < gridWidth; ++i) {
             drawLine(img, i * deltaGridWidth, 0, i * deltaGridWidth, img.getHeight() - 1, color, thickness);
         }
         for (int i = 0; i < gridHeight; ++i) {
             drawLine(img, 0, i * deltaGridHeight, img.getWidth() - 1, i * deltaGridHeight, color, thickness);
+        }
+    }
+
+    private static void fillColorMap(WritableImage img, double[][] grid, double[] colorThresholds, Color[] colors) {
+        double deltaWidth = (img.getWidth() - 1) / (grid.length - 1);
+        double deltaHeight = (img.getHeight() - 1) / (grid[0].length - 1);
+        for (int y = 0; y < grid.length - 1; ++y) {
+            for (int x = 0; x < grid[0].length - 1; ++x) {
+                double x1 = x * deltaWidth;
+                double x2 = (x + 1) * deltaWidth;
+                double y1 = y * deltaHeight;
+                double y2 = (y + 1) * deltaHeight;
+                for (double yi = y1; yi <= y2; ++yi) {
+                    double value1 = Interpolation.linear(y1, grid[y][x], y2, grid[y + 1][x], yi);
+                    double value2 = Interpolation.linear(y1, grid[y][x + 1], y2, grid[y + 1][x + 1], yi);
+                    for (int i = 0; i < colorThresholds.length - 1; ++i) {
+                        if (colorThresholds[i] <= value1 && value1 <= colorThresholds[i + 1]) {
+                            fill(img, x1, yi, colors[i]);
+                        }
+                        if (colorThresholds[i] <= value2 && value2 <= colorThresholds[i + 1]) {
+                            fill(img, x2, yi, colors[i]);
+                        }
+                    }
+                }
+                for (double xi = x1; xi <= x2; ++xi) {
+                    double value1 = Interpolation.linear(x1, grid[y][x], x2, grid[y][x + 1], xi);
+                    double value2 = Interpolation.linear(x1, grid[y + 1][x], x2, grid[y + 1][x + 1], xi);
+                    for (int i = 0; i < colorThresholds.length - 1; ++i) {
+                        if (colorThresholds[i] <= value1 && value1 <= colorThresholds[i + 1]) {
+                            fill(img, xi, y1, colors[i]);
+                        }
+                        if (colorThresholds[i] <= value2 && value2 <= colorThresholds[i + 1]) {
+                            fill(img, xi, y2, colors[i]);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -102,24 +139,11 @@ public class Graphics {
         for (int i = 0; i < colorThresholds.length; ++i) {
             colorThresholds[i] = min + i * delta;
         }
-        double deltaWidth = img.getWidth() / (grid.length - 1);
-        double deltaHeight = img.getHeight() / (grid[0].length - 1);
         for (int i = 0; i < colors.length - 1; ++i) {
             double isoValue = min + (i + 1) * ((max - min) / colors.length);
             drawIsoline(img, colors[i], 1, isoValue, grid);
         }
-
-        for (int y = 0; y < grid.length; ++y) {
-            for (int x = 0; x < grid[0].length; ++x) {
-                double value = grid[y][x];
-                for (int i = 0; i < colorThresholds.length - 1; ++i) {
-                    if (colorThresholds[i] <= value && value <= colorThresholds[i + 1]) {
-                        fill(img, x * deltaWidth, y * deltaHeight, colors[i]);
-                        break;
-                    }
-                }
-            }
-        }
+        fillColorMap(img, grid, colorThresholds, colors);
     }
 
     public static void drawSmoothMap(WritableImage img, double[][] grid, Color[] colors) {
@@ -151,7 +175,7 @@ public class Graphics {
 
     public static void drawSmoothLegend(WritableImage img, Color[] colors) {
         int colorsNum = colors.length;
-        double delta = img.getWidth() / (colorsNum - 1);
+        double delta = (img.getWidth() - 1) / (colorsNum - 1);
         for (int i = 0; i < colorsNum - 1; ++i) {
             double startX = i * delta;
             double endX = (i + 1) * delta;
@@ -166,7 +190,7 @@ public class Graphics {
 
     public static void drawColorMapLegend(WritableImage img, Color[] colors) {
         int colorsNum = colors.length;
-        double delta = img.getWidth() / colorsNum;
+        double delta = (img.getWidth() - 1) / colorsNum;
         for (int i = 0; i < colorsNum; ++i) {
             double startX = i * delta;
             double endX = (i + 1) * delta;
@@ -191,11 +215,11 @@ public class Graphics {
         double k = (value - grid1) * (value - grid2);
         if (k < 0) {
             return coord1 + (coord2 - coord1) * Math.abs((value - grid1) / (grid2 - grid1));
-        } else if (value == grid1) {
-            return coord1 + eps;
         } else if (value == grid2) {
-            return coord2 - eps;
-        } else {
+            return coord2 - (coord2 - coord1) * eps;
+        } else if (value == grid1) {
+            return coord1 + (coord2 - coord1) * eps;
+        }  else {
             return -1;
         }
     }
@@ -253,14 +277,26 @@ public class Graphics {
             return;
         }
         int gridWidth = grid[0].length;
-        double deltaGridWidth = img.getWidth() / (gridWidth - 1);
-        double deltaGridHeight = img.getHeight() / (gridHeight - 1);
+        double deltaGridWidth = (img.getWidth() - 1) / (gridWidth - 1);
+        double deltaGridHeight = (img.getHeight() - 1) / (gridHeight - 1);
         for (int y = 0; y < gridHeight - 1; ++y) {
             for (int x = 0; x < gridWidth - 1; ++x) {
                 double x1 = x * deltaGridWidth;
                 double x2 = (x + 1) * deltaGridWidth;
                 double y1 = y * deltaGridHeight;
                 double y2 = (y + 1) * deltaGridHeight;
+                if (value == grid[y][x] && value == grid[y][x + 1]) {
+                    drawLine(img, x1, y1, x2, y1, color, thickness);
+                }
+                if (value == grid[y + 1][x] && value == grid[y + 1][x + 1]) {
+                    drawLine(img, x1, y2, x2, y2, color, thickness);
+                }
+                if (value == grid[y][x] && value == grid[y + 1][x]) {
+                    drawLine(img, x1, y1, x1, y2, color, thickness);
+                }
+                if (value == grid[y][x + 1] && value == grid[y + 1][x + 1]) {
+                    drawLine(img, x2, y1, x2, y2, color, thickness);
+                }
                 double upX = findIsolinePoint(x1, x2, grid[y][x], grid[y][x + 1], value, isolineEpsilon);
                 double downX = findIsolinePoint(x1, x2, grid[y + 1][x], grid[y + 1][x + 1], value, isolineEpsilon);
                 double leftY = findIsolinePoint(y1, y2 , grid[y][x], grid[y + 1][x], value, isolineEpsilon);
@@ -272,6 +308,15 @@ public class Graphics {
                     double centerValue = (grid[y][x] + grid[y + 1][x] + grid[y][x + 1] +
                             grid[y + 1][x + 1]) / 4;
                     double k = (centerValue - value) * (grid[y][x] - value);
+                    if (k == 0) {
+                        k = (centerValue - value) * (value - grid[y + 1][x]);
+                        if (k == 0) {
+                            k = (centerValue - value) * (value - grid[y][x + 1]);
+                            if (k == 0) {
+                                k = (centerValue - value) * (grid[y + 1][x + 1] - value);
+                            }
+                        }
+                    }
                     if (k <= 0) {
                         double p1X = findIsolinePoint(x1, (x1 + x2) / 2, grid[y][x], centerValue, value, isolineEpsilon);
                         double p1Y = findIsolinePoint(y1, (y1 + y2) / 2, grid[y][x], centerValue, value, isolineEpsilon);
@@ -281,7 +326,7 @@ public class Graphics {
                         drawLine(img, points[2][0], points[2][1], p1X, p1Y, color, thickness);
                         drawLine(img, points[1][0], points[1][1], p2X, p2Y, color, thickness);
                         drawLine(img, points[3][0], points[3][1], p2X, p2Y, color, thickness);
-                    } else {
+                    } else if (k > 0) {
                         double p1X = findIsolinePoint(x1, (x1 + x2) / 2, grid[y + 1][x], centerValue, value, isolineEpsilon);
                         double p1Y = findIsolinePoint((y1 + y2) / 2, y2, centerValue, grid[y + 1][x], value, isolineEpsilon);
                         double p2X = findIsolinePoint((x1 + x2) / 2, x2, centerValue, grid[y][x + 1], value, isolineEpsilon);

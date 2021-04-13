@@ -19,26 +19,16 @@ public class AboutWindow extends InfoWindow {
             "3. Use display mode buttons to change display mode between smooth and discrete color maps.\r\n" +
             "4. Click on any point on image to show a dynamic isoline\r\n" +
             "5. Save result image by using save button\r\n\r\n" +
-            "Properties file format:\r\n" +
-            "startX=...\r\n" +
-            "endX=...\r\n" +
-            "startY=...\r\n" +
-            "endY=...\r\n" +
-            "gridWidth=...\r\n" +
-            "gridHeight=...\r\n" +
-            "isolinesCount=...\r\n" +
-            "//red, green, blue ϵ [0, 255])\r\n" +
-            "R0=...\r\n" +
-            "G0=...\r\n" +
-            "B0=...\r\n" +
-            "…\r\n" +
-            "Rk=...\r\n" +
-            "Gk=...\r\n" +
-            "Bk=...\r\n" +
+            "Properties file format:\r\n\r\n" +
+            "startX endX startY endY\r\n" +
+            "gridWidth gridHeight\r\n" +
+            "isolinesCount\r\n" +
+            "//red, green, blue is [0, 255]\r\n" +
+            "R0 G0 B0\r\n" +
+            "...\r\n" +
+            "Rk Gk Bk // k is isolinesCount\r\n" +
             "//isolines color\r\n" +
-            "Rz=...\r\n" +
-            "Gz=...\r\n" +
-            "Bz=...\r\n";
+            "Rz Gz Bz\r\n";
     public AboutWindow() {
         super("About", "/fxml/aboutWindow.fxml", text, 450, 450);
     }

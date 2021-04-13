@@ -54,8 +54,8 @@ public class Interpolation {
             return 0;
         }
         int gridWidth = grid[0].length;
-        double deltaGridWidth = width / (gridWidth - 1);
-        double deltaGridHeight = height / (gridHeight - 1);
+        double deltaGridWidth = (width - 1) / (gridWidth - 1);
+        double deltaGridHeight = (height - 1) / (gridHeight - 1);
         for (int gY = 0; gY < gridHeight - 1; ++gY) {
             for (int gX = 0; gX < gridWidth - 1; ++gX) {
                 double x1 = gX * deltaGridWidth;

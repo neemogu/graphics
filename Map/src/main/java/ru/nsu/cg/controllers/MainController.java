@@ -146,7 +146,7 @@ public class MainController implements Subscriber, Initializable {
         gridDisplayMenu.setSelected(model.getSettings().isGridVisible());
         legendLabelsHBox.getChildren().clear();
         double[] labels = model.getLegendLabels();
-        legendLabelsHBox.setSpacing(model.getLegendImage().getWidth() / (labels.length - 1) - 15.0);
+        legendLabelsHBox.setSpacing(model.getLegendImage().getWidth() / (labels.length - 1) - 22.0);
         for (double l : labels) {
             addLegendLabel(l);
         }

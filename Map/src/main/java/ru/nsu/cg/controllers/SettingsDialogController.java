@@ -62,6 +62,7 @@ public class SettingsDialogController implements DialogController, Initializable
         model.getSettings().saveSettings();
         model.getFunction().saveParameters();
         model.getSettings().addSubscriber(this);
+        setFunctionFields();
         update();
     }
 
@@ -123,14 +124,17 @@ public class SettingsDialogController implements DialogController, Initializable
         });
     }
 
-    @Override
-    public void update() {
+    private void setFunctionFields() {
         startXTextField.setText("" + model.getFunction().getStartX());
         endXTextField.setText("" + model.getFunction().getEndX());
         startYTextField.setText("" + model.getFunction().getStartY());
         endYTextField.setText("" + model.getFunction().getEndY());
         gridWidthTextField.setText("" + model.getFunction().getGridWidth());
         gridHeightTextField.setText("" + model.getFunction().getGridHeight());
+    }
+
+    @Override
+    public void update() {
         isolineColorPicker.setValue(model.getSettings().getIsolineColor());
         isolinesCountTextField.setText("" + model.getSettings().getIsolinesCount());
         Color[] colors = model.getSettings().getColors();

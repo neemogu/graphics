@@ -131,7 +131,7 @@ public class MapModel {
     }
 
     public double getFunctionY(double imageY) {
-        return function.getStartY() + (function.getEndY() - function.getStartY()) / mainImage.getHeight() * imageY;
+        return function.getStartY() + (function.getEndY() - function.getStartY()) / mainImage.getHeight() * (mainImage.getHeight() - 1 - imageY);
     }
 
     public double getFunctionValue(double imageX, double imageY) {

@@ -20,6 +20,7 @@ public class PropertyReader {
         if (strProperty == null) {
             return defaultValue;
         }
+        strProperty = strProperty.replaceAll("\\s","");
         try {
             return Integer.parseInt(strProperty);
         } catch (NumberFormatException e) {
@@ -32,6 +33,7 @@ public class PropertyReader {
         if (strProperty == null) {
             throw new PropertyException("Missing '" + propertyName + "' property");
         }
+        strProperty = strProperty.replaceAll("\\s","");
         try {
             return Integer.parseInt(strProperty);
         } catch (NumberFormatException e) {
@@ -45,6 +47,7 @@ public class PropertyReader {
         if (strProperty == null) {
             return defaultValue;
         }
+        strProperty = strProperty.replaceAll("\\s","");
         try {
             return Double.parseDouble(strProperty);
         } catch (NumberFormatException e) {
@@ -103,20 +106,47 @@ public class PropertyReader {
         model.update();
     }
 
-    public void readPropertiesFromFile(File file) throws PropertyException {
-        InputStream is;
+    private void readFileToProperties(BufferedReader reader, Properties properties) throws PropertyException {
         try {
-            is = new FileInputStream(file);
+            String[] bounds = reader.readLine().split("\\s+");
+            properties.setProperty("startX", bounds[0]);
+            properties.setProperty("endX", bounds[1]);
+            properties.setProperty("startY", bounds[2]);
+            properties.setProperty("endY", bounds[3]);
+            String[] gridSize = reader.readLine().split("\\s+");
+            properties.setProperty("gridWidth", gridSize[0]);
+            properties.setProperty("gridHeight", gridSize[1]);
+            String isolinesCount = reader.readLine();
+            properties.setProperty("isolinesCount", isolinesCount);
+            String colorsPrev = reader.readLine();
+            String colorsCur;
+            for (int i = 0; (colorsCur = reader.readLine()) != null; ++i) {
+                String[] colors = colorsPrev.split("\\s+");
+                properties.setProperty("R" + i, colors[0]);
+                properties.setProperty("G" + i, colors[1]);
+                properties.setProperty("B" + i, colors[2]);
+                colorsPrev = colorsCur;
+            }
+            String[] isoColors = colorsPrev.split("\\s+");
+            properties.setProperty("Rz", isoColors[0]);
+            properties.setProperty("Gz", isoColors[1]);
+            properties.setProperty("Bz", isoColors[2]);
+        } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+            throw new PropertyException("Invalid properties file format, please check out a help dialog");
+        } catch (IOException e) {
+            throw new PropertyException("Error while reading a file");
+        }
+    }
+
+    public void readPropertiesFromFile(File file) throws PropertyException {
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(file));
         } catch (FileNotFoundException e) {
             throw new PropertyException("File not found");
         }
-        Properties properties;
-        try {
-            properties = new Properties();
-            properties.load(is);
-        } catch (IOException e) {
-            throw new PropertyException("File reading error");
-        }
+        Properties properties = new Properties();
+        readFileToProperties(reader, properties);
         model.getSettings().saveSettings();
         model.getFunction().saveParameters();
         try {

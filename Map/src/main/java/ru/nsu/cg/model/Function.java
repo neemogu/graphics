@@ -36,7 +36,7 @@ public class Function {
         double deltaY = (endY - startY) / (gridHeight - 1);
         for (int i = 0; i < gridHeight; ++i) {
             for (int j = 0; j < gridWidth; ++j) {
-                result[i][j] = calculate(startX + j * deltaX, startY + i * deltaY);
+                result[gridHeight - 1 - i][j] = calculate(startX + j * deltaX, startY + i * deltaY);
             }
         }
         return result;
