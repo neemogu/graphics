@@ -57,6 +57,7 @@ public class ModelFile {
         }
         try {
             model.getSettingsModel().getCurve().setPoints(points);
+            model.getSettingsModel().getCurve().setSelectedPoint(points.get(0).getX(), points.get(0).getY());
         } catch (IllegalArgumentException e) {
             throw new IOException(e.getMessage());
         }
