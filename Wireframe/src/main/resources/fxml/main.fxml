@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+<VBox fx:controller="ru.nsu.cg.controllers.MainController" styleClass="main"
+      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <MenuBar styleClass="menuBar">
+        <Menu styleClass="menu" mnemonicParsing="false" text="Model">
+            <MenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="openMenu" text="Open model as a file"/>
+            <MenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="saveMenu" text="Save model to a file"/>
+            <SeparatorMenuItem styleClass="separatorMenu"/>
+            <MenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="settingsMenu" text="Curve settings"/>
+            <SeparatorMenuItem styleClass="separatorMenu"/>
+            <MenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="resetMenu" text="Reset model rotations"/>
+        </Menu>
+        <Menu styleClass="menu" mnemonicParsing="false" text="Help">
+            <MenuItem styleClass="menuItem" mnemonicParsing="false" fx:id="aboutMenu" text="About       "/>
+        </Menu>
+    </MenuBar>
+
+    <ToolBar styleClass="toolbar">
+        <fx:include source="buttons/openButton.fxml" fx:id="openButton"/>
+        <fx:include source="buttons/saveButton.fxml" fx:id="saveButton"/>
+        <fx:include source="buttons/settingsButton.fxml" fx:id="settingsButton"/>
+        <fx:include source="buttons/resetButton.fxml" fx:id="resetButton"/>
+        <fx:include source="buttons/aboutButton.fxml" fx:id="aboutButton"/>
+    </ToolBar>
+
+    <Pane VBox.vgrow="ALWAYS" styleClass="imagePane" fx:id="resizePane">
+        <ImageView fx:id="mainImageView"/>
+        <VBox.margin>
+            <Insets>
+                <top>10</top>
+                <right>10</right>
+                <bottom>10</bottom>
+                <left>10</left>
+            </Insets>
+        </VBox.margin>
+    </Pane>
+
+    <stylesheets>
+        <URL value="@/stylesheets/style.css"/>
+    </stylesheets>
+</VBox>

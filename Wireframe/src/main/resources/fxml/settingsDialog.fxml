@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.image.Image?>
+<VBox fx:controller="ru.nsu.cg.controllers.SettingsDialogController"
+            xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <Pane VBox.vgrow="ALWAYS" fx:id="resizePane">
+        <ImageView fx:id="curveWindow"/>
+        <VBox.margin>
+            <Insets>
+                <top>15</top>
+                <right>10</right>
+                <left>10</left>
+            </Insets>
+        </VBox.margin>
+    </Pane>
+    <HBox styleClass="twoButtonsBox">
+        <Button styleClass="simpleButton" fx:id="addButton">
+            <tooltip>
+                <Tooltip styleClass="tooltip" text="Add a point to curve" />
+            </tooltip>
+            <graphic>
+                <ImageView>
+                    <Image preserveRatio="true" requestedHeight="20" requestedWidth="20"
+                           smooth="true" url="@/icons/plus.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button styleClass="simpleButton" fx:id="removeButton">
+            <tooltip>
+                <Tooltip styleClass="tooltip" text="Remove a point from curve" />
+            </tooltip>
+            <graphic>
+                <ImageView>
+                    <Image preserveRatio="true" requestedHeight="20" requestedWidth="20"
+                           smooth="true" url="@/icons/minus.png" />
+                </ImageView>
+            </graphic>
+        </Button>
+        <VBox.margin>
+            <Insets>
+                <top>10</top>
+                <left>10</left>
+                <right>10</right>
+                <bottom>10</bottom>
+            </Insets>
+        </VBox.margin>
+    </HBox>
+    <HBox styleClass="settingHBox">
+        <Label styleClass="propertyLabel" text="m: "/>
+        <TextField styleClass="propertyTextField" fx:id="mTextField"/>
+        <Label styleClass="propertyLabel" text="n: "/>
+        <TextField styleClass="propertyTextField" fx:id="nTextField"/>
+        <Label styleClass="propertyLabel" text="k: "/>
+        <TextField styleClass="propertyTextField" fx:id="kTextField"/>
+        <Label styleClass="propertyLabel" text="tN: "/>
+        <TextField styleClass="propertyTextField" fx:id="tnTextField"/>
+        <VBox.margin>
+            <Insets>
+                <top>15</top>
+                <right>10</right>
+                <left>10</left>
+            </Insets>
+        </VBox.margin>
+    </HBox>
+    <HBox styleClass="settingHBox">
+        <Label styleClass="propertyLabel" text="R:"/>
+        <TextField styleClass="propertyTextField" fx:id="redTextField"/>
+        <Label styleClass="propertyLabel" text="G:"/>
+        <TextField styleClass="propertyTextField" fx:id="greenTextField"/>
+        <Label styleClass="propertyLabel" text="B:"/>
+        <TextField styleClass="propertyTextField" fx:id="blueTextField"/>
+        <VBox.margin>
+            <Insets>
+                <top>5</top>
+                <right>10</right>
+                <left>10</left>
+            </Insets>
+        </VBox.margin>
+    </HBox>
+    <HBox styleClass="twoButtonsBox">
+        <Button styleClass="simpleButton" text="OK" fx:id="okButton"/>
+        <Button styleClass="simpleButton" text="Cancel" fx:id="cancelButton"/>
+        <VBox.margin>
+            <Insets>
+                <top>10</top>
+                <left>10</left>
+                <right>10</right>
+                <bottom>10</bottom>
+            </Insets>
+        </VBox.margin>
+    </HBox>
+    <stylesheets>
+        <URL value="@/stylesheets/style.css"/>
+    </stylesheets>
+</VBox>
