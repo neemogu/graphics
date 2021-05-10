@@ -72,6 +72,10 @@ public class Graphics2D {
                 circleBresenham(img, (int) (p.getX() * img.getWidth()), (int) (p.getY() * img.getHeight()), radius, selectedColor);
             }
         }
+        for (int i = 0; i < points.length - 1; ++i) {
+            drawLine(img, points[i].getX() * img.getWidth(), points[i].getY() * img.getHeight(),
+                    points[i + 1].getX() * img.getWidth(), points[i + 1].getY() * img.getHeight(), color, 1);
+        }
     }
 
     public static double[][] getTParams(int tN) {

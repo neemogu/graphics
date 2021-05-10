@@ -27,8 +27,8 @@ public class CurveSettings {
     private int savedK = k;
 
     @Getter
-    private int tN = 5;
-    private static final int minTN = 5;
+    private int tN = 1;
+    private static final int minTN = 1;
     private static final int maxTN = 100;
     private int savedTN = tN;
 
