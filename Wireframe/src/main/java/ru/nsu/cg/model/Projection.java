@@ -6,12 +6,12 @@ import org.apache.commons.math3.linear.RealMatrix;
 
 public class Projection {
     @Getter
-    private double near = 0.1;
+    private double near = 0.5;
     private static final double minNear = 0.1;
-    private static final double maxNear = 0.7;
+    private static final double maxNear = 5.0;
     @Getter
-    private final double far = 2.0;
-    private static final boolean zoomFov = true;
+    private final double far = 10.0;
+    private static final boolean zoomFov = false;
     @Getter
     private double fov = (float)(Math.PI / 2);
     private static final double minFov = (float)(Math.PI / 12);
@@ -21,8 +21,8 @@ public class Projection {
         double tanHalfFov = Math.tan(fov / 2);
         double aspect = screenWidth / screenHeight;
         return new Array2DRowRealMatrix(new double[][]{
-                {1 / (aspect * tanHalfFov), 0, 0, 0},
-                {0, 1 / tanHalfFov, 0, 0},
+                {near / (aspect * tanHalfFov), 0, 0, 0},
+                {0, near / tanHalfFov, 0, 0},
                 {0, 0, -(far + near) / (far - near), -(2 * far * near) / (far - near)},
                 {0, 0, -1, 0}
         });
@@ -35,7 +35,7 @@ public class Projection {
                 fov = minFov;
             }
         } else {
-            near += 0.05;
+            near += 0.1;
             if (near > maxNear) {
                 near = maxNear;
             }
@@ -50,7 +50,7 @@ public class Projection {
                 fov = maxFov;
             }
         } else {
-            near -= 0.05;
+            near -= 0.1;
             if (near < minNear) {
                 near = minNear;
             }

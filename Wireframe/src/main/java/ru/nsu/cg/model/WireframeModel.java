@@ -18,7 +18,7 @@ public class WireframeModel {
     private final ArrayList<Subscriber> subs = new ArrayList<>();
 
     private final Camera camera = new Camera(
-            new Vector3D(0.0, 0.0, 1.3),
+            new Vector3D(0.0, 0.0, 1.0),
             new Vector3D(0.0, 0.0, -1.0),
             new Vector3D(0.0, 1.0, 0.0)
     );
