@@ -1,3 +1,1 @@
-# g18203_Pogodaev
-
-Погодаев Никита Алексеевич - 18203
+Graphics course labs
